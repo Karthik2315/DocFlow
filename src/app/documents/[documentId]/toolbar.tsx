@@ -1,9 +1,10 @@
 "use client";
 
-import { LucideIcon,PrinterIcon,Redo2Icon,SpellCheckIcon,Undo2Icon } from 'lucide-react';
+import { Bold, Italic, LucideIcon,PrinterIcon,Redo2Icon,SpellCheckIcon,Undo2Icon } from 'lucide-react';
 import React from 'react'
 import { cn } from '@/lib/utils';
 import { useEditorStore } from '@/store/use-editor-store';
+import { Separator } from '@/components/ui/separator';
 
 interface ToolbarButtonProps {
   onClick?: () => void;
@@ -57,12 +58,30 @@ const Toolbar = () => {
         }
       }
     ],
+    [
+      {
+        label:"Bold",
+        icon:Bold,
+        isActive: editor?.isActive("bold"),
+        onClick:()=> editor?.chain().focus().toggleBold().run(),
+      },
+      {
+        label:"Italic",
+        icon:Italic,
+        isActive: editor?.isActive("italic"),
+        onClick:()=> editor?.chain().focus().toggleItalic().run(),
+      }
+    ]
   ];
   return (
     <div className="bg-[#F1F4F9] px-2.5 py-2.5 rounded-[24px] min-h-[40px] flex items-center gap-x-0.5 overflow-x-auto">
       {sections[0].map((item)=> (
         <ToolbarButton key={item.label} onClick={item.onClick} isActive={item.isActive} icon={item.icon} />
       ))}
+      <Separator orientation="vertical" className="h-6 bg-neutral-300" />
+      {sections[1].map((item=>(
+        <ToolbarButton key={item.label} onClick={item.onClick} isActive={item.isActive} icon={item.icon} />
+      )))}
     </div>
   )
 }
