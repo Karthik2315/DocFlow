@@ -21,6 +21,9 @@ export const Editor = () => {
     onCreate : ({ editor}) => {
       setEditor(editor);
     },
+    onDestroy : () => {
+      setEditor(null);
+    },
     editorProps:{
       attributes: {
         style: "padding-left: 56px; padding-right: 56px;",
