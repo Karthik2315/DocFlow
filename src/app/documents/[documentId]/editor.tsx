@@ -12,6 +12,7 @@ import { TableHeader } from '@tiptap/extension-table-header'
 import { Image } from '@tiptap/extension-image'
 import ImageResize from 'tiptap-extension-resize-image'
 import { useEditorStore } from '@/store/use-editor-store'
+import Underline from '@tiptap/extension-underline';
 
 
 
@@ -35,7 +36,7 @@ export const Editor = () => {
     },
     extensions: [StarterKit, TaskList, TaskItem.configure({
         nested: true,
-      }), Table, TableRow, TableCell, TableHeader, Image ,ImageResize],
+      }), Table, TableRow, TableCell, TableHeader, Image ,ImageResize,Underline],
     content: '<p>Hello World! 🌎️</p>',
     immediatelyRender: false,
   })
