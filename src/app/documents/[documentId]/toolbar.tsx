@@ -1,6 +1,6 @@
 "use client";
 
-import { LucideIcon,Undo2Icon } from 'lucide-react';
+import { LucideIcon,PrinterIcon,Redo2Icon,SpellCheckIcon,Undo2Icon } from 'lucide-react';
 import React from 'react'
 import { cn } from '@/lib/utils';
 import { useEditorStore } from '@/store/use-editor-store';
@@ -37,6 +37,25 @@ const Toolbar = () => {
         icon:Undo2Icon,
         onClick: () => editor?.chain().focus().undo().run(),
       },
+      {
+        label:"Redo",
+        icon:Redo2Icon,
+        onClick: () => editor?.chain().focus().redo().run(),
+      },
+      {
+        label:"Print",
+        icon:PrinterIcon,
+        onClick:()=> window.print(),
+      },
+      {
+        label:"Spell Check",
+        icon:SpellCheckIcon,
+        onClick:()=> {
+          if(!editor) return ;
+          const dom = editor.view.dom;
+          dom.spellcheck = !dom.spellcheck;
+        }
+      }
     ],
   ];
   return (
