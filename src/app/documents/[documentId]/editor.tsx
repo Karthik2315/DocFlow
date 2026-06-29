@@ -18,6 +18,7 @@ import { FontFamily } from '@tiptap/extension-font-family'
 import {Heading} from '@tiptap/extension-heading'
 import { Highlight } from '@tiptap/extension-highlight'
 import { Color } from '@tiptap/extension-color'
+import { Link } from '@tiptap/extension-link'
 
 
 
@@ -42,7 +43,11 @@ export const Editor = () => {
     },
     extensions: [StarterKit, TaskList, TaskItem.configure({
         nested: true,
-      }), Table, TableRow, TableCell, TableHeader, Image ,ImageResize,Underline,FontFamily,TextStyle,Heading,Highlight.configure({ multicolor: true }),Color],
+      }), Table, TableRow, TableCell, TableHeader, Image ,ImageResize,Underline,FontFamily,TextStyle,Heading,Highlight.configure({ multicolor: true }),Color,Link.configure({
+        openOnClick:true,
+        autolink:true,
+        defaultProtocol: "https"
+      })],
     content: '<p>Hello World! 🌎️</p>',
     immediatelyRender: false,
   })
