@@ -1,6 +1,6 @@
 "use client";
 
-import { Bold, Italic, LucideIcon,PrinterIcon,Redo2Icon,SpellCheckIcon,Underline,Undo2Icon } from 'lucide-react';
+import { Bold, Italic, LucideIcon,PrinterIcon,Redo2Icon,SpellCheckIcon,Underline,Undo2Icon,MessageSquarePlus, ListTodo, RemoveFormattingIcon } from 'lucide-react';
 import React from 'react'
 import { cn } from '@/lib/utils';
 import { useEditorStore } from '@/store/use-editor-store';
@@ -21,7 +21,6 @@ const ToolbarButton = ({ onClick, isActive, icon: Icon }: ToolbarButtonProps) =>
     </button>
   )
 }
-
 
 const Toolbar = () => {
   const { editor } = useEditorStore();
@@ -77,6 +76,29 @@ const Toolbar = () => {
         isActive: editor?.isActive("underline"),
         onClick:()=> editor?.chain().focus().toggleUnderline().run(),
       }
+    ],
+    [
+      {
+        label:"Comment",
+        icon:MessageSquarePlus,
+        onClick:()=> {
+          console.log("Comment button clicked");
+        },
+        isActive: false
+      },
+      {
+        label:"List Todo",
+        icon:ListTodo,
+        onClick:()=>{
+          editor?.chain().focus().toggleTaskList().run();
+        },
+        isActive: editor?.isActive("taskList")
+      },
+      {
+        label:"Remove Formatting",
+        icon:RemoveFormattingIcon,
+        onClick:()=> editor?.chain().focus().unsetAllMarks().clearNodes().run()
+      }
     ]
   ];
   return (
@@ -86,6 +108,10 @@ const Toolbar = () => {
       ))}
       <Separator orientation="vertical" className="h-6 bg-neutral-300" />
       {sections[1].map((item=>(
+        <ToolbarButton key={item.label} onClick={item.onClick} isActive={item.isActive} icon={item.icon} />
+      )))}
+      <Separator orientation="vertical" className="h-6 bg-neutral-300" />
+      {sections[2].map((item=>(
         <ToolbarButton key={item.label} onClick={item.onClick} isActive={item.isActive} icon={item.icon} />
       )))}
     </div>
