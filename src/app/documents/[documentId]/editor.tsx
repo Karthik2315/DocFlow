@@ -16,6 +16,8 @@ import Underline from '@tiptap/extension-underline';
 import { TextStyle } from '@tiptap/extension-text-style'
 import { FontFamily } from '@tiptap/extension-font-family'
 import {Heading} from '@tiptap/extension-heading'
+import { Highlight } from '@tiptap/extension-highlight'
+import { Color } from '@tiptap/extension-color'
 
 
 
@@ -40,7 +42,7 @@ export const Editor = () => {
     },
     extensions: [StarterKit, TaskList, TaskItem.configure({
         nested: true,
-      }), Table, TableRow, TableCell, TableHeader, Image ,ImageResize,Underline,FontFamily,TextStyle,Heading],
+      }), Table, TableRow, TableCell, TableHeader, Image ,ImageResize,Underline,FontFamily,TextStyle,Heading,Highlight.configure({ multicolor: true }),Color],
     content: '<p>Hello World! 🌎️</p>',
     immediatelyRender: false,
   })
