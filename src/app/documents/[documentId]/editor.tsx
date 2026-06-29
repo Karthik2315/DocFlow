@@ -13,6 +13,10 @@ import { Image } from '@tiptap/extension-image'
 import ImageResize from 'tiptap-extension-resize-image'
 import { useEditorStore } from '@/store/use-editor-store'
 import Underline from '@tiptap/extension-underline';
+import { TextStyle } from '@tiptap/extension-text-style'
+import { FontFamily } from '@tiptap/extension-font-family'
+import {Heading} from '@tiptap/extension-heading'
+
 
 
 
@@ -36,7 +40,7 @@ export const Editor = () => {
     },
     extensions: [StarterKit, TaskList, TaskItem.configure({
         nested: true,
-      }), Table, TableRow, TableCell, TableHeader, Image ,ImageResize,Underline],
+      }), Table, TableRow, TableCell, TableHeader, Image ,ImageResize,Underline,FontFamily,TextStyle,Heading],
     content: '<p>Hello World! 🌎️</p>',
     immediatelyRender: false,
   })
