@@ -1,6 +1,6 @@
 "use client";
 
-import { Bold, Italic, LucideIcon,PrinterIcon,Redo2Icon,SpellCheckIcon,Underline,Undo2Icon,MessageSquarePlus, ListTodo, RemoveFormattingIcon, ChevronDown, HighlighterIcon, Link2Icon, ImageIcon, UploadIcon, SearchIcon,AlignLeftIcon, AlignCenterIcon, AlignRightIcon, AlignJustifyIcon, ListIcon,ListOrderedIcon } from 'lucide-react';
+import { Bold, Italic, LucideIcon,PrinterIcon,Redo2Icon,SpellCheckIcon,Underline,Undo2Icon,MessageSquarePlus, ListTodo, RemoveFormattingIcon, ChevronDown, HighlighterIcon, Link2Icon, ImageIcon, UploadIcon, SearchIcon,AlignLeftIcon, AlignCenterIcon, AlignRightIcon, AlignJustifyIcon, ListIcon,ListOrderedIcon, PlusIcon, MinusIcon, LucideTableCellsSplit } from 'lucide-react';
 import React, { useState } from 'react'
 import { cn } from '@/lib/utils';
 import { useEditorStore } from '@/store/use-editor-store';
@@ -16,6 +16,81 @@ interface ToolbarButtonProps {
   onClick?: () => void;
   isActive?: boolean;
   icon: LucideIcon;
+}
+
+const FontSizeButton = () => {
+  const { editor } = useEditorStore();
+  const currentFontSize = editor?.getAttributes("textStyle").fontSize ? editor?.getAttributes("textStyle").fontSize.replace("px", "") : "16";
+  const [fontSize, setFontSize] = useState(currentFontSize);
+  const [inputValue, setInputValue] = useState(currentFontSize);
+  const [isEditing, setIsEditing] = useState(false);
+
+  const updateFontSize = (newSize: string) => {
+    let size = parseInt(newSize);
+    if(size<0) 
+    {
+      size = 1;
+    }
+    if(!isNaN(size) && size > 0){
+      editor?.chain().focus().setFontSize(`${size}px`).run();
+      newSize = size.toString();
+      setFontSize(newSize);
+      setInputValue(newSize);
+      setIsEditing(false);
+    }
+  }
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleInputBlur = () =>{
+    updateFontSize(inputValue);
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      updateFontSize(inputValue);
+      editor?.commands.focus();
+    }
+  };
+
+  const increment = () => {
+    const temp = parseInt(fontSize) + 1;
+    updateFontSize(temp.toString());
+  }
+  const decrement = () => {
+    const temp = parseInt(fontSize) - 1;
+    if(temp > 0){
+      updateFontSize(temp.toString());
+    }
+    else {
+      updateFontSize("1");
+    }
+  }
+
+  return (
+    <div className="flex items-center gap-x-1">
+      <button className="h-7 w-7 shrink-0 flex flex-col items-center justify-between rounded-sm hover:bg-neutral-200/80 px-1.5 py-1 overflow-hidden text-[12px] font-bold" onClick={decrement}>
+        <MinusIcon className="size-4"/>
+      </button>
+      {isEditing ? (
+        <input type="text" value={inputValue} onChange={handleInputChange} onKeyDown={handleKeyDown} onBlur={handleInputBlur} 
+        className="h-7 w-10 text-sm text-center border border-neutral-400 rounded-sm bg-transparent focus:outline-none focus:ring-0"/>
+      ) : (
+        <button onClick={()=>{
+          setIsEditing(true);
+          setFontSize(currentFontSize);
+        }} className="h-7 w-10 text-sm text-center border border-neutral-400 rounded-sm hover:bg-neutral-200/80 cursor-text">
+          {currentFontSize}
+        </button>
+      )}
+      <button className="h-7 w-7 shrink-0 flex flex-col items-center justify-between rounded-sm hover:bg-neutral-200/80 px-1.5 py-1 overflow-hidden text-[12px] font-bold" onClick={increment}>
+        <PlusIcon className="size-4"/>
+      </button>
+    </div>
+  )
 }
 
 const ListButton = () => {
@@ -429,6 +504,8 @@ const Toolbar = () => {
       <FontFamilyButton />
       <Separator orientation="vertical" className="h-6 bg-neutral-300" />
       <HeadingLevelButton />
+      <Separator orientation="vertical" className="h-6 bg-neutral-300" />
+      <FontSizeButton />
       <Separator orientation="vertical" className="h-6 bg-neutral-300" />
       {sections[1].map((item=>(
         <ToolbarButton key={item.label} onClick={item.onClick} isActive={item.isActive} icon={item.icon} />
