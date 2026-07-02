@@ -44,7 +44,7 @@ const ListButton = () => {
       <DropdownMenuContent className="flex flex-col gap-y-1 bg-slate-100">
         {lists.map(({label,isActive,onClick,icon:Icon})=>(
           <button key={label} className={cn("flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-neutral-200/80",
-            
+            isActive && "bg-neutral-200/80"
           )} onClick={onClick}>
             <Icon className="size-6" />
             <span className="text-[12px] font-bold">{label}</span>
