@@ -19,6 +19,8 @@ import {Heading} from '@tiptap/extension-heading'
 import { Highlight } from '@tiptap/extension-highlight'
 import { Color } from '@tiptap/extension-color'
 import { Link } from '@tiptap/extension-link'
+import { TextAlign } from '@tiptap/extension-text-align'
+
 
 
 
@@ -41,7 +43,9 @@ export const Editor = () => {
         class: "focus:outline-none print:border-0 bg-white border border-[#C7C7C7] flex flex-col min-h-[1054px] w-[816px] pt-10 pr-14 pb-10 cursor-text"
       },
     },
-    extensions: [StarterKit, TaskList, TaskItem.configure({
+    extensions: [StarterKit, TaskList,TextAlign.configure({
+        types: ['heading', 'paragraph'],
+      }), TaskItem.configure({
         nested: true,
       }), Table, TableRow, TableCell, TableHeader, Image ,ImageResize,Underline,FontFamily,TextStyle,Heading,Highlight.configure({ multicolor: true }),Color,Link.configure({
         openOnClick:true,
