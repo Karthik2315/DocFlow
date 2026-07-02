@@ -21,6 +21,7 @@ import { Color } from '@tiptap/extension-color'
 import { Link } from '@tiptap/extension-link'
 import { TextAlign } from '@tiptap/extension-text-align'
 import { FontSizeExtension } from '@/extensions/font-size'
+import { LineHeightExtension } from '@/extensions/line-height'
 
 
 
@@ -51,6 +52,9 @@ export const Editor = () => {
         openOnClick:true,
         autolink:true,
         defaultProtocol: "https"
+      }), LineHeightExtension.configure({
+        types:["paragraph","heading"],
+        defaultLineHeight: "normal"
       })],
     content: '<p>Hello World! 🌎️</p>',
     immediatelyRender: false,
