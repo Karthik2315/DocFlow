@@ -1,6 +1,6 @@
 "use client";
 
-import { Bold, Italic, LucideIcon,PrinterIcon,Redo2Icon,SpellCheckIcon,Underline,Undo2Icon,MessageSquarePlus, ListTodo, RemoveFormattingIcon, ChevronDown, HighlighterIcon, Link2Icon, ImageIcon, UploadIcon, SearchIcon,AlignLeftIcon, AlignCenterIcon, AlignRightIcon, AlignJustifyIcon } from 'lucide-react';
+import { Bold, Italic, LucideIcon,PrinterIcon,Redo2Icon,SpellCheckIcon,Underline,Undo2Icon,MessageSquarePlus, ListTodo, RemoveFormattingIcon, ChevronDown, HighlighterIcon, Link2Icon, ImageIcon, UploadIcon, SearchIcon,AlignLeftIcon, AlignCenterIcon, AlignRightIcon, AlignJustifyIcon, ListIcon,ListOrderedIcon } from 'lucide-react';
 import React, { useState } from 'react'
 import { cn } from '@/lib/utils';
 import { useEditorStore } from '@/store/use-editor-store';
@@ -16,6 +16,43 @@ interface ToolbarButtonProps {
   onClick?: () => void;
   isActive?: boolean;
   icon: LucideIcon;
+}
+
+const ListButton = () => {
+  const { editor } = useEditorStore();
+  const lists = [
+    {
+      label:"Bullet List",
+      icon : ListIcon,
+      isActive: editor?.isActive("bulletList"),
+      onClick:()=> editor?.chain().focus().toggleBulletList().run()
+    },
+    {
+      label:"Ordered List",
+      icon : ListOrderedIcon,
+      isActive: editor?.isActive("orderedList"),
+      onClick:()=> editor?.chain().focus().toggleOrderedList().run()
+    }
+  ]
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <button className={cn("h-7 min-w-7 shrink-0 flex flex-col items-center justify-between rounded-sm hover:bg-neutral-200/80 px-1.5 py-1 overflow-hidden text-[12px] font-bold")}>
+        <ListIcon className='size-4'/>
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="flex flex-col gap-y-1 bg-slate-100">
+        {lists.map(({label,isActive,onClick,icon:Icon})=>(
+          <button key={label} className={cn("flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-neutral-200/80",
+            
+          )} onClick={onClick}>
+            <Icon className="size-6" />
+            <span className="text-[12px] font-bold">{label}</span>
+          </button>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
 }
 
 const AlignButton = () => {
@@ -402,6 +439,7 @@ const Toolbar = () => {
       <LinkButton />
       <ImageButton />
       <AlignButton />
+      <ListButton />
       {sections[2].map((item=>(
         <ToolbarButton key={item.label} onClick={item.onClick} isActive={item.isActive} icon={item.icon} />
       )))}
