@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { Navbar } from './Navbar'
+import { TemplatesGallery } from './templateGallery'
 
 const Home = () => {
   return (
@@ -9,7 +10,7 @@ const Home = () => {
         <Navbar />
       </div>
       <div className='mt-16'>
-        <Link href="/documents/2315">Hei guys </Link>
+        <TemplatesGallery />
       </div>
     </div>
   )

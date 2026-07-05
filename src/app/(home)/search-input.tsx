@@ -24,7 +24,7 @@ export const SearchInput = () => {
     inputRef.current?.blur();
   }
   return (
-    <div className="flex-1 flex items-center justify-center">
+    <div className="flex-1 flex items-center justify-center mr-[85px]">
       <form onSubmit={handleSubmit} className="relative max-w-[720px] w-full rounded-full bg-[#F0F4F8] transition-all duration-200 focus-within:bg-white focus-within:shadow-[0_1px_1px_0_rgba(65,69,73,.3),0_1px_3px_1px_rgba(65,69,73,.15)]">
         <Input
           value={value}
