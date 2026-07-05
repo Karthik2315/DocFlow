@@ -1,6 +1,7 @@
 import React from 'react'
 import { Editor } from './editor';
 import Toolbar from './toolbar';
+import { Navbar } from './navbar';
 
 
 interface PageProps {
@@ -14,6 +15,7 @@ const page = async({params,}: PageProps) => {
   console.log(documentId);
   return (
     <div className="min-h-screen bg-[#FAFBFD]">
+      <Navbar />
       <Toolbar />
       <Editor />
     </div>
