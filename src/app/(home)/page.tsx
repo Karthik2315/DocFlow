@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { Navbar } from './Navbar'
-import { TemplatesGallery } from './templateGallery'
+import { TemplatesGallery } from './templatesGallery'
 
 const Home = () => {
   return (
