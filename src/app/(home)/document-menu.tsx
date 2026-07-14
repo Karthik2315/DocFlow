@@ -28,7 +28,9 @@ export const DocumentMenu = ({documentId,title,onNewTab}:DocumentMenuProps) => {
           Open in a New tab
         </DropdownMenuItem>
         <RemoveDialog documentId={documentId}>
-          <DropdownMenuItem>
+          <DropdownMenuItem
+          onSelect={(e) => e.preventDefault()}
+          onClick={(e) => e.stopPropagation()} className="cursor-pointer">
             <TrashIcon className="size-4" />
             Remove
           </DropdownMenuItem>

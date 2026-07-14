@@ -14,7 +14,7 @@ export const DocumentRow = ({document}:DocumentRowProps) => {
     window.open(`/documents/${id}`,"_blank");
   }
   return (
-    <TableRow className="cursor-pointer">
+    <TableRow className="cursor-pointer border-none">
       <TableCell className="w-[50px]">
         <SiGoogledocs className="size-6 fill-blue-500"/>
       </TableCell>
