@@ -32,7 +32,7 @@ export const DocumentMenu = ({documentId,title,onNewTab}:DocumentMenuProps) => {
         <DropdownMenuTrigger className="cursor-pointer">
           <MoreVertical className="size-4 text-slate-400"/>
         </DropdownMenuTrigger>
-        <DropdownMenuContent>
+        <DropdownMenuContent className="bg-white">
           <DropdownMenuItem onClick={() => onNewTab(documentId)} className="cursor-pointer bg-white">
             <ExternalLinkIcon className="size-4" />
             Open in a New tab
