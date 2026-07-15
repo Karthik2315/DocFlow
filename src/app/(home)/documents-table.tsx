@@ -51,6 +51,11 @@ export const DocumentsTable = ({documents,loadMore,status}:DocumentsTableProps) 
           )}
         </Table>
       )}
+      <div className="min-w-screen flex items-center justify-center text-[12px]">
+        <button disabled={status !== "CanLoadMore"} onClick={() => loadMore(5)} className=" hover:bg-slate-500 text-slate-400 cursor-pointer rounded-md px-2 py-1 hover:text-white hover:scale-105 duration-200 transition-all">
+          {status === "CanLoadMore" ? "Load more" : "End of results"}
+        </button>
+      </div>
     </div>
   )
 }
