@@ -376,7 +376,7 @@ const HeadingLevelButton = () => {
           <ChevronDown className="size-4" />
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="p-1 flex flex-col gap-y-1 bg-slate-50">
+      <DropdownMenuContent className="p-1 flex flex-col gap-y-1 bg-white">
         {headings.map(({label,value,fontSize})=> (
            (
             <button key={label} style={{fontSize}} className={cn("flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-neutral-200/80",
@@ -421,7 +421,7 @@ const FontFamilyButton = () => {
           <ChevronDown className="ml-2 shrink-0 size-4" />
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="p-1 flex flex-col gap-y-1">
+      <DropdownMenuContent className="p-1 flex flex-col gap-y-1 bg-white">
         {fonts.map(({label,value}) => (
           <button key={label} className={cn("flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-neutral-200/80",
             editor?.getAttributes("textStyle").fontFamily === value && "bg-neutral-200/80"
