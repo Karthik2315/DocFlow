@@ -12,6 +12,7 @@ import { useMutation } from "convex/react";
 import { useRouter } from "next/navigation";
 import { api } from "../../../convex/_generated/api";
 import { useState } from "react";
+import { toast } from "sonner";
 
 
 export const TemplatesGallery = () => {
@@ -22,7 +23,7 @@ export const TemplatesGallery = () => {
     setIsCreating(true);
     create({title,intialContent}).then((documentId) => {
       router.push(`/documents/${documentId}`)
-    }).finally(() => {
+    }).catch(() => toast.error("Only admins can create document")).finally(() => {
       setIsCreating(false);
     })
   }

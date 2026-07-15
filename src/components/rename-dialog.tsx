@@ -14,6 +14,7 @@ import { useState } from "react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Field, FieldGroup } from "./ui/field";
+import { toast } from "sonner";
 
 interface RenameDialog {
   documentId: Id<"documents">;
@@ -29,7 +30,10 @@ export const RenameDialog = ({documentId,initialTitle,open,onOpenChange}:RenameD
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsUpdating(true);
-    update({id:documentId , title:title.trim() || "untitled"}).then(() => {onOpenChange(false)}).finally(() => {
+    update({id:documentId , title:title.trim() || "untitled"}).then(() => {
+      onOpenChange(false)
+      toast.success("Document name changed")
+    }).catch(()=> toast.error("Only admins can rename documents")).finally(() => {
       setIsUpdating(false);
     })
   }
